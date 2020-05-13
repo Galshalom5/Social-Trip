@@ -40,6 +40,9 @@ class FullPageIntroWithFixedTransparentNavbar extends React.Component {
                   <MDBNavItem>
                     <MDBNavLink to="#">Profile</MDBNavLink>
                   </MDBNavItem>
+                  <MDBNavItem>
+                    <MDBNavLink to="#">Gallery</MDBNavLink>
+                  </MDBNavItem>
                 </MDBNavbarNav>
               </MDBCollapse>
             </MDBNavbar>

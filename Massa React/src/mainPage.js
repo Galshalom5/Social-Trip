@@ -1,11 +1,17 @@
 import React from 'react';
-import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBContainer, MDBMask, MDBView } from 'mdbreact';
-import { BrowserRouter as Router } from 'react-router-dom';
-import FooterPage from './footer.js'
+import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink} from 'mdbreact';
+import { BrowserRouter as Router , Switch , Route } from 'react-router-dom';
+import main from './main.js'
+import Events from './Events.js'
+import ContactUs from './ContactUs.js'
+import Donation from './Donation.js'
+import Gallery from './Gallery.js'
+import AboutUs from './AboutUs.js'
 
 class FullPageIntroWithFixedTransparentNavbar extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       collapse: false,
       isWideEnough: false,
@@ -23,47 +29,41 @@ class FullPageIntroWithFixedTransparentNavbar extends React.Component {
     return (
       <div>
         <header>
-          <Router>
-            <MDBNavbar color="bg-primary" fixed="top" dark expand="md" scrolling transparent>
+          <Router> 
+            <MDBNavbar dark fixed="top" dark expand="md" scrolling transparent>
               <MDBNavbarBrand href="/">
-                <strong>Navbar</strong>
               </MDBNavbarBrand>
               {!this.state.isWideEnough && <MDBNavbarToggler onClick={this.onClick} />}
               <MDBCollapse isOpen={this.state.collapse} navbar>
-                <MDBNavbarNav left>
-                  <MDBNavItem active>
-                    <MDBNavLink to="#">Home</MDBNavLink>
+                <MDBNavbarNav center = "true">
+                <MDBNavItem>
+                    <MDBNavLink to="./ContactUs">צרו קשר</MDBNavLink>
                   </MDBNavItem>
                   <MDBNavItem>
-                    <MDBNavLink to="#">Link</MDBNavLink>
+                    <MDBNavLink to="./Donation">תרומות</MDBNavLink>
+                  </MDBNavItem>
+                  <MDBNavItem >
+                  <MDBNavLink to="./Gallery">גלריה</MDBNavLink>
                   </MDBNavItem>
                   <MDBNavItem>
-                    <MDBNavLink to="#">Profile</MDBNavLink>
+                    <MDBNavLink to="./Events">אירועים</MDBNavLink>
                   </MDBNavItem>
                   <MDBNavItem>
-                    <MDBNavLink to="#">Gallery</MDBNavLink>
+                  <MDBNavLink  to="./AboutUs">אודות</MDBNavLink>
                   </MDBNavItem>
                 </MDBNavbarNav>
               </MDBCollapse>
             </MDBNavbar>
+          <Switch>
+            <Route path="/" component = {main} exact/>
+            <Route path="/Gallery" component={Gallery} exact />
+            <Route path="/Donation" component = {Donation} exact/>
+            <Route path="/AboutUs" component={AboutUs} exact />
+            <Route path="/Events" component = {Events} exact/>
+            <Route path="/ContactUs" component={ContactUs} exact />
+          </Switch>
           </Router>
-
-          <MDBView src="https://mdbootstrap.com/img/Photos/Others/img%20(40).jpg">
-            <MDBMask overlay="purple-light" className="flex-center flex-column text-white text-center">
-              <h2>This Navbar is fixed</h2>
-              <h5>It will always stay visible on the top, even when you scroll down</h5>
-              <p>Navbar's background will switch from transparent to solid color while scrolling down</p><br />
-              <p>Full page intro with background image will be always displayed in full screen mode, regardless of device </p>
-            </MDBMask>
-          </MDBView>
         </header>
-
-        <main>
-          <MDBContainer className="text-center my-5">
-            <p align="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          </MDBContainer>
-          <FooterPage/>
-        </main>
       </div>
     );
   }

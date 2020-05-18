@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { MDBContainer, MDBMask, MDBView } from 'mdbreact';
 import FooterPage from './footer.js'
+
  class main extends Component {
     render() {
         return (
@@ -13,7 +14,7 @@ import FooterPage from './footer.js'
             <MDBContainer className="text-center my-5">
             </MDBContainer>
             </main>  
-            <FooterPage/> 
+            <FooterPage/>       
             </div>
         )
     }

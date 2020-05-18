@@ -5,8 +5,9 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import "./index.css";
 import App from "./App";
-import * as firebase from 'firebase'
+import firebase from 'firebase/app'
 import "firebase/firestore";
+import "firebase/storage";
 import registerServiceWorker from './registerServiceWorker';
 
 const config = {
@@ -21,9 +22,12 @@ const config = {
   };
   firebase.initializeApp(config)
   
+  const storage = firebase.storage()
+  const db = firebase.firestore()
 
 
 ReactDOM.render( <App /> , document.getElementById('root'));
 
 registerServiceWorker();
 
+export {storage,db, firebase as default}

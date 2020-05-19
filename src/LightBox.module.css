@@ -1,0 +1,23 @@
+.sameSize {
+    height: 250px;
+    width: 350px;
+    object-fit: cover;
+    cursor: zoom-in;
+    
+}
+.aaa {
+height: 250px;
+overflow: hidden;
+
+}
+
+.aaa img {
+    transition: transform 2s, filter 1.5s ease-in-out;
+    transform-origin: center center;
+    filter: brightness(50%);
+  }
+
+  .aaa:hover img {
+    filter: brightness(100%);
+    transform: scale(1.3);
+  }

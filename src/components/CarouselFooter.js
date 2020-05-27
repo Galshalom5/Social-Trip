@@ -6,9 +6,10 @@ import {
   MDBCarouselItem,
   MDBTestimonial,
   MDBAvatar,
-  MDBIcon,
   MDBCol
 } from "mdbreact";
+import UncontrolledLottie from './UncontrolledLottie.jsx';
+
 
 const getCol = (state) => {
 const {feedBack} = state;
@@ -16,16 +17,11 @@ const {feedBack} = state;
   return (
     <MDBCol style={{ display: "inline-block" }} md="3">
       <MDBTestimonial>
-        <MDBAvatar style={{ width: "80px" }} className="mx-auto">
-          <img
-            src="https://mdbootstrap.com/img/Photos/Avatars/img%20(26).jpg"
-            alt=""
-            className="rounded-circle img-fluid"
-          />
+        <MDBAvatar style={{ width: "100px" }} className="mx-auto">
+          <UncontrolledLottie />
         </MDBAvatar>
-        <h6 className="font-weight-bold mt-4"> {item.data().name}</h6>
-        <p className="font-weight-normal">
-          <MDBIcon icon="quote-left" className="pr-2" />
+        <h6 style = {{textAlign:'center'}} className="font-weight-bold mt-4"> {item.data().name}</h6>
+        <p  style = {{textAlign:'center'}} className="font-weight-normal">
           {item.data().feedBackTxt}
         </p>
       </MDBTestimonial>

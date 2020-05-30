@@ -1,0 +1,21 @@
+hr.outside {
+  margin-bottom: 3em;
+}
+.bg {
+  background-color: bisque;
+}
+
+/* .costumHeight{
+
+    height: 100%;
+} */
+
+modal {
+  color: blue;
+}
+
+.btn {
+  width: 8rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+}

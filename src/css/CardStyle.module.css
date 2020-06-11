@@ -1,0 +1,18 @@
+hr.outside {
+  margin-bottom: 3em;
+}
+.bg {
+  background-color: bisque;
+}
+
+
+.btn {
+  width: 8rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  align-self: flex-end;
+}
+
+.modalHeight {
+  max-height: 77vh !important;
+}

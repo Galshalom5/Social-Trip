@@ -1,0 +1,9 @@
+.myModal .modal-content {
+
+    background-color: rgba(0, 0, 0, 0) !important; 
+}
+
+.myContainer .modal-dialog .modal-content {
+    box-shadow: none !important
+}
+

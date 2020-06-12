@@ -7,15 +7,24 @@ import {
   MDBModalHeader,
   MDBModalFooter,
   MDBInput,
-  MDBDatePickerV5,
+  MDBIcon,
+  Fa,
+  MDBRow,
+  MDBCol
 } from "mdbreact";
 import '../css/UploadEvent.css'
 import { storage, db } from '../index'
 import '../css/Admin.css'
+import { faCoffee } from '@fortawesome/fontawesome-free-solid'
+
 
 
 
 class UploadEvent extends Component {
+  constructor(props) {
+    super(props)
+  }
+  
   state = {
     modal16: false,
     eventName: "",
@@ -26,7 +35,7 @@ class UploadEvent extends Component {
     fullDescription: "",
     isActive1: false,
     isActive2: false
-  };
+  }
 
   clickHandler = async (event) => {
     event.preventDefault()
@@ -69,6 +78,7 @@ class UploadEvent extends Component {
               .then(() => {
                 console.log('event added to firebase')
                 alert('התווסף אירוע חדש')
+                this.props.value(0)
 
               }).catch(err => {
                 console.log('err add to firestore', err)
@@ -86,9 +96,11 @@ class UploadEvent extends Component {
       })
   }
   render() {
+    const { modalIsOpen } = this.props
+    console.log(modalIsOpen)
     return (
       <MDBContainer>
-        <MDBBtn onClick={this.toggle(16)}>MDBModal</MDBBtn>
+        <MDBBtn onClick={this.toggle(16)} rounded outline color="success" >הוסף אירוע</MDBBtn>
         <MDBModal
           position="left-top"
           isOpen={this.state.modal16}

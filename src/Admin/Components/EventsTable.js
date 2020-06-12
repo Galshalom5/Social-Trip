@@ -1,12 +1,15 @@
 import React from 'react';
-import { MDBDataTable, MDBContainer, MDBIcon, MDBBtn, MDBModalFooter, MDBModalBody, MDBModalHeader, MDBModal } from 'mdbreact';
+import { MDBDataTable, MDBContainer, MDBIcon, MDBBtn, MDBModalFooter, MDBModalBody, MDBModalHeader, MDBModal, MDBRow } from 'mdbreact';
 import { useEffect, useState, useRef } from 'react'
 import { storage, db } from '../../index'
+import UploadEvent from '../UploadEvent'
 
 const EventsTable = () => {
     const [open, setopen] = useState(false)
     const eventNameRef = useRef(null)
+    const imageNameRef = useRef(null)
     const [events, setevents] = useState([])
+    const [modalIsOpen, setmodalIsOpen] = useState({ index: 1 })
     const objArray = []
     const data = {
         columns: [
@@ -48,17 +51,35 @@ const EventsTable = () => {
     };
 
     const areYouSure = (event) => {
+        
         eventNameRef.current = event.target.id
         setopen(true)
     }
 
     const deleteHandler = () => {
+        var imageUrl
         db.collection('events').doc(`${eventNameRef.current}`).delete()
-        .then(() => alert('האירוע נמחק בהצלחה'))
-        setopen(false)
+            .then(() => {
+                db.collection('events').doc(`${eventNameRef.current}`).get()
+                .then(snapshot => {
+                    console.log(snapshot.data())
+                imageUrl = snapshot.data().url
+
+                // storage.refFromURL(imageUrl)
+                // .then(ref => {
+                //     ref.delete()
+                //     .then(() =>{
+                //         alert('האירוע נמחק בהצלחה')
+                //         setopen(false)
+                //     })
+                // })
+                })
+
+            })
     }
 
     useEffect(() => {
+        console.log(modalIsOpen)
         let date
         db.collection('events').get()
             .then(querySnapshot => {
@@ -70,12 +91,12 @@ const EventsTable = () => {
                         date: date,
                         audience: item.data().audiance,
                         delete: <MDBBtn size="sm" outline color="danger" id={`${item.data().eventName}`} onClick={areYouSure} >מחק</MDBBtn>,
-                        participants: <MDBBtn size="sm" outline color="green" id={`${item.data().eventName}`} >צפייה בנרשמים</MDBBtn>
+                        participants: <MDBBtn size="sm" outline color="blue" id={`${item.data().eventName}`} >צפייה בנרשמים</MDBBtn>
                     })
                 })
                 setevents(objArray)
             })
-    }, [open])
+    }, [open, modalIsOpen])
 
     return (
         <MDBContainer style={{ backgroundColor: "white" }}>
@@ -87,24 +108,25 @@ const EventsTable = () => {
                 searchLabel="חיפוש"
                 btn
                 scrollY
-                maxHeight="40vh"
+                maxHeight="65vh"
                 striped
                 bordered
                 small
                 data={data}
             />
-            <MDBModal isOpen={open} toggle={() => setopen(false)}  
-            backdrop={true}
-              >
-                <MDBModalHeader>MDBModal title</MDBModalHeader>
-                <MDBModalBody>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </MDBModalBody>
-                <MDBModalFooter>
-                    <MDBBtn outline color="secondary" onClick={() => setopen(false)}>ביטול</MDBBtn>
-                    <MDBBtn outline color="primary" onClick={deleteHandler}>מחק</MDBBtn>
+            <MDBModal isOpen={open} toggle={() => setopen(false)}
+                backdrop={true}
+                size="sm"
+            >
+                <MDBModalHeader style={{ backgroundColor: "#ff4444" }} className="text-white justify-content-center" >האם למחוק את האירוע?</MDBModalHeader>
+                <MDBModalFooter className="justify-content-center">
+                    <MDBBtn color="danger" onClick={() => setopen(false)}>ביטול</MDBBtn>
+                    <MDBBtn outline color="danger" onClick={deleteHandler}>מחק</MDBBtn>
                 </MDBModalFooter>
             </MDBModal>
+            <MDBRow className="text-center">
+                <UploadEvent value={(i) => setmodalIsOpen({ index: i })} />
+            </MDBRow>
         </MDBContainer>
     );
 }

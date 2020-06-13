@@ -60,13 +60,13 @@ class UploadEvent extends Component {
   };
 
   addEventHandler = () => {
+    this.props.value(2)
     let storageRef = storage.ref()
     let eventImagesRef = storageRef.child(`eventsImages/${this.state.filePath.name}`)
     eventImagesRef.put(this.state.filePath)
       .then(snapshot => {
         snapshot.ref.getDownloadURL()
           .then(url => {
-            console.log('in url')
             db.collection('events').doc(`${this.state.eventName}`).set({
               eventName: this.state.eventName,
               url: url,
@@ -77,9 +77,7 @@ class UploadEvent extends Component {
             })
               .then(() => {
                 console.log('event added to firebase')
-                alert('התווסף אירוע חדש')
                 this.props.value(0)
-
               }).catch(err => {
                 console.log('err add to firestore', err)
                 alert('event was not added to firebase please try again')
@@ -97,7 +95,6 @@ class UploadEvent extends Component {
   }
   render() {
     const { modalIsOpen } = this.props
-    console.log(modalIsOpen)
     return (
       <MDBContainer>
         <MDBBtn onClick={this.toggle(16)} rounded outline color="success" >הוסף אירוע</MDBBtn>

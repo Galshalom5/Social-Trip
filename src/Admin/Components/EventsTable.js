@@ -67,7 +67,6 @@ const EventsTable = () => {
 
     useEffect(() => {
         if (!isReady) {
-            console.log(modalIsOpen)
             let date
             db.collection('events').get()
                 .then(querySnapshot => {
@@ -97,8 +96,6 @@ const EventsTable = () => {
                         .then(() => {
                             currentEvent.delete()
                                 .then(() => {
-                                    alert('האירוע נמחק מהמערכת')
-                                    
                                     setisReady(false)
                                 }).catch(err => {
                                     alert('האירוע אינו נמחק מהמערכת עקב תקלה')
@@ -130,7 +127,7 @@ const EventsTable = () => {
                     small
                     data={data}
                 />
-                {isReady ? <ModalLoader/> : null}
+                {isReady || modalIsOpen.index === 2 ? <ModalLoader/> : null}
             <MDBModal isOpen={open} toggle={() => setopen(false)}
                 backdrop={true}
                 size="sm"
@@ -142,7 +139,7 @@ const EventsTable = () => {
                 </MDBModalFooter>
             </MDBModal>
             <MDBRow className="text-center">
-                <UploadEvent value={(i) => setmodalIsOpen({ index: i })} />
+                <UploadEvent value={ (i) =>  setmodalIsOpen({ index: i }) } />
             </MDBRow>
         </MDBContainer>
     )

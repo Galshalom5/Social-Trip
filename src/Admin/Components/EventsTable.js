@@ -1,10 +1,12 @@
 import React from 'react';
-import { MDBDataTable, MDBContainer, MDBIcon, MDBBtn, MDBModalFooter, MDBModalBody, MDBModalHeader, MDBModal, MDBRow } from 'mdbreact';
+import { MDBDataTable, MDBContainer, MDBBtn, MDBModalFooter, MDBModalHeader, MDBModal, MDBRow } from 'mdbreact';
 import { useEffect, useState, useRef } from 'react'
 import { storage, db } from '../../index'
 import UploadEvent from '../UploadEvent'
+import ModalLoader from './LoaderModal'
 
 const EventsTable = () => {
+    const [isReady, setisReady] = useState(false)
     const [open, setopen] = useState(false)
     const eventNameRef = useRef(null)
     const imageNameRef = useRef(null)
@@ -50,70 +52,85 @@ const EventsTable = () => {
 
     };
 
+
+
+
     const areYouSure = (event) => {
-        
+
         eventNameRef.current = event.target.id
         setopen(true)
     }
 
     const deleteHandler = () => {
-        var imageUrl
-        db.collection('events').doc(`${eventNameRef.current}`).delete()
-            .then(() => {
-                db.collection('events').doc(`${eventNameRef.current}`).get()
-                .then(snapshot => {
-                    console.log(snapshot.data())
-                imageUrl = snapshot.data().url
-
-                // storage.refFromURL(imageUrl)
-                // .then(ref => {
-                //     ref.delete()
-                //     .then(() =>{
-                //         alert('האירוע נמחק בהצלחה')
-                //         setopen(false)
-                //     })
-                // })
-                })
-
-            })
+        setisReady(true)
     }
 
     useEffect(() => {
-        console.log(modalIsOpen)
-        let date
-        db.collection('events').get()
-            .then(querySnapshot => {
-                querySnapshot.forEach(item => {
-                    date = item.data().date
-                    date = date.toString().split("-").reverse().join("-")
-                    objArray.push({
-                        name: item.data().eventName,
-                        date: date,
-                        audience: item.data().audiance,
-                        delete: <MDBBtn size="sm" outline color="danger" id={`${item.data().eventName}`} onClick={areYouSure} >מחק</MDBBtn>,
-                        participants: <MDBBtn size="sm" outline color="blue" id={`${item.data().eventName}`} >צפייה בנרשמים</MDBBtn>
+        if (!isReady) {
+            console.log(modalIsOpen)
+            let date
+            db.collection('events').get()
+                .then(querySnapshot => {
+                    querySnapshot.forEach(item => {
+                        date = item.data().date
+                        date = date.toString().split("-").reverse().join("-")
+                        objArray.push({
+                            name: item.data().eventName,
+                            date: date,
+                            audience: item.data().audiance,
+                            delete: <MDBBtn size="sm" outline color="danger" id={`${item.data().eventName}`} onClick={areYouSure} >מחק</MDBBtn>,
+                            participants: <MDBBtn size="sm" outline color="blue" id={`${item.data().eventName}`} >צפייה בנרשמים</MDBBtn>
+                        })
                     })
+                    setevents(objArray)
                 })
-                setevents(objArray)
-            })
-    }, [open, modalIsOpen])
+        }
+        else {
+            setopen(false)
+            var imageUrl, imageRef
+            var currentEvent = db.collection('events').doc(`${eventNameRef.current}`)
+            currentEvent.get()
+                .then(async snapshot => {
+                    imageUrl = await snapshot.data().url
+                    imageRef = storage.refFromURL(`${imageUrl}`)
+                    imageRef.delete()
+                        .then(() => {
+                            currentEvent.delete()
+                                .then(() => {
+                                    alert('האירוע נמחק מהמערכת')
+                                    
+                                    setisReady(false)
+                                }).catch(err => {
+                                    alert('האירוע אינו נמחק מהמערכת עקב תקלה')
+                                    console.log('err = ', err)
+                                    setopen(false)
+                                })
+                        })
+                }).catch(err => {
+                    alert('האירוע אינו נמחק עקב תקלה')
+                    console.log('err = ', err)
+                    setopen(false)
+                })
+        }
+    }, [isReady, modalIsOpen])
 
     return (
         <MDBContainer style={{ backgroundColor: "white" }}>
-            <MDBDataTable
-                entriesLabel="מספר הערכים בטבלה"
-                paginationLabel={["הקודם", "הבא"]}
-                infoLabel={["מראה", "עד", "מתוך", "ערכים"]}
-                className="text-right justify-content-center"
-                searchLabel="חיפוש"
-                btn
-                scrollY
-                maxHeight="65vh"
-                striped
-                bordered
-                small
-                data={data}
-            />
+                <MDBDataTable
+                    entriesLabel="מספר הערכים בטבלה"
+                    paginationLabel={["הקודם", "הבא"]}
+                    infoLabel={["מראה", "עד", "מתוך", "ערכים"]}
+                    className="text-right justify-content-center"
+                    searchLabel="חיפוש"
+                    btn
+                    scrollY
+                    maxHeight="65vh"
+                    striped
+                    bordered
+                    small
+                    data={data}
+                />
+                {isReady ? <ModalLoader/> : null}
             <MDBModal isOpen={open} toggle={() => setopen(false)}
                 backdrop={true}
                 size="sm"
@@ -128,7 +145,7 @@ const EventsTable = () => {
                 <UploadEvent value={(i) => setmodalIsOpen({ index: i })} />
             </MDBRow>
         </MDBContainer>
-    );
+    )
 }
 
 export default EventsTable;

@@ -14,3 +14,10 @@
 .md-form{
 margin-top: 2rem;
 }
+
+.dz-error-message{
+  display: none!important;
+}
+.dz-progress {
+  display: none!important;
+}

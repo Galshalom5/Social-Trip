@@ -19,7 +19,6 @@ class ModalLoader extends Component {
         <MDBModalBody  style={{background: "rgba(0, 0, 0, 0.0001)"}} className="text-left" >
         <Loader className=""/>
         </MDBModalBody>
-
         </MDBModal>
       </MDBContainer>
     );

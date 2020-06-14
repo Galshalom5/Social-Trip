@@ -83,6 +83,8 @@ const FeedBackTable = () => {
           });
         });
         setfeedBacks(objArray);
+      }).catch((error)=> {
+        console.error("unable to fetch data : ", error);
       });
   }, [open, modalIsOpen]);
 

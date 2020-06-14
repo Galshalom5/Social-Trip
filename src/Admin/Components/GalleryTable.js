@@ -54,25 +54,24 @@ const GalleryTable = () => {
     setisReady(true);
     setDisabled(true);
   };
-
+  const resizer = async (item, thumbnailsRef) => {
+    Resizer.imageFileResizer(
+      item,
+      650,
+      550,
+      "JPEG",
+      80,
+      0,
+      async (uri) => {
+        await thumbnailsRef.put(uri).then((snapshot) => {});
+      },
+      "blob"
+    );
+  };
   const addPictureHandle = async (pictureFiles) => {
     setisReady(true);
     setDisabled(true);
     const storageRef = storage.ref();
-    const start = async (item, thumbnailsRef) => {
-      Resizer.imageFileResizer(
-        item,
-        350,
-        250,
-        "JPEG",
-        55,
-        0,
-        async (uri) => {
-          await thumbnailsRef.put(uri).then((snapshot) => {});
-        },
-        "blob"
-      );
-    };
     await Promise.all(
       pictureFiles.map(async (item) => {
         if (item) {
@@ -81,7 +80,7 @@ const GalleryTable = () => {
             `CaruselPhotos/thumbnails/${item.name}`
           );
           await imagesRef.put(item).then(async (snapshot) => {
-            await start(item, thumbnailsRef);
+            await resizer(item, thumbnailsRef);
           });
         }
       })
@@ -120,9 +119,9 @@ const GalleryTable = () => {
         });
         setisReady(false);
         setDisabled(false);
-      }).catch = (err) => {
-        console.log(err);
-      };
+      }).catch( (error) => {
+        console.error("unable to fetch data : ", error);
+      });
     } else if (pictureNameRef.current) {
       setopen(false);
       const storageRef = storage.ref();

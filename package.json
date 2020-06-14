@@ -6,6 +6,7 @@
   "dependencies": {
     "@emotion/styled": "^10.0.27",
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "autosize": "^4.0.2",
     "exif-js": "^2.3.0",
     "firebase": "^7.14.4",
     "font-awesome": "^4.7.0",

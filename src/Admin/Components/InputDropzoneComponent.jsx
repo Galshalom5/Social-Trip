@@ -14,6 +14,7 @@ class InputDropzoneComponent extends Component {
     this.djsConfig = {
       addRemoveLinks: true,
       autoProcessQueue:false,
+      dictDefaultMessage: 'גרור תמונות לכאן או לחץ לבחירה',
       acceptedFiles: "image/jpeg,image/jpg,image/png,image/gif"
     };
 

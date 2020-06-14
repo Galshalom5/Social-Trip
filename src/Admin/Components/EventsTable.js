@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from 'react'
 import { storage, db } from '../../index'
 import UploadEvent from '../UploadEvent'
 import ModalLoader from './LoaderModal'
+import '../../css/EventsTable.css'
 
 const EventsTable = () => {
     const [isReady, setisReady] = useState(false)
@@ -117,7 +118,7 @@ const EventsTable = () => {
                     entriesLabel="מספר הערכים בטבלה"
                     paginationLabel={["הקודם", "הבא"]}
                     infoLabel={["מראה", "עד", "מתוך", "ערכים"]}
-                    className="text-right justify-content-center"
+                    className={`text-right justify-content-center ${isReady || modalIsOpen.index === 2 ? 'disable' : '' }`}
                     searchLabel="חיפוש"
                     btn
                     scrollY

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { auth } from "./index";
+import { auth } from "../index";
 class AdminPage extends Component {
   render() {
     return (

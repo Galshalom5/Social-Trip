@@ -1,21 +1,32 @@
 import React from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBMask, MDBView } from "mdbreact";
+import { MDBContainer, MDBRow, MDBCol, MDBView } from "mdbreact";
 import Lightbox from "react-image-lightbox";
-import "../Lightbox.css";
-import LightBoxStyle from "../Lightbox.module.css";
+import "../css/Lightbox.css";
+import LightBoxStyle from "../css/Lightbox.module.css";
 import { storage } from "../index";
 
 class LightboxPage extends React.Component {
   state = {
     photoIndex: 0,
     isOpen: false,
+    imagesSmall: [],
     images: [],
   };
 
   componentDidMount() {
     const storageRef = storage.ref();
-    const imagesRef = storageRef.child("CaruselPhotos");
+    const imagesRef = storageRef.child("CaruselPhotos/thumbnails");
+    const imageBigRef = storageRef.child("CaruselPhotos");
     imagesRef.listAll().then((res) => {
+      res.items.forEach((element) => {
+        element.getDownloadURL().then((url) => {
+          this.setState({
+            imagesSmall: [...this.state.imagesSmall, { imageUrl: url }],
+          });
+        });
+      });
+    });
+    imageBigRef.listAll().then((res) => {
       res.items.forEach((element) => {
         element.getDownloadURL().then((url) => {
           console.log("set new state");
@@ -29,9 +40,9 @@ class LightboxPage extends React.Component {
 
   renderImages = () => {
     let photoIndex = -1;
-    const { images } = this.state;
+    const { imagesSmall } = this.state;
 
-    return images.map((imageSrc) => {
+    return imagesSmall.map((imageSrc) => {
       photoIndex++;
       const privateKey = photoIndex;
       return (
@@ -56,8 +67,7 @@ class LightboxPage extends React.Component {
   };
 
   render() {
-    console.log("render LightBox");
-    const { photoIndex, isOpen, images } = this.state;
+    const { photoIndex, isOpen, imagesSmall, images } = this.state;
     return (
       <MDBContainer className="mt-5">
         <div className="mdb-lightbox">

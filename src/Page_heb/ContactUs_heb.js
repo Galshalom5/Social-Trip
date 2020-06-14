@@ -1,15 +1,23 @@
 import React, { Component } from "react";
-import { MDBContainer, MDBMask, MDBView, MDBCardBody, MDBCard } from "mdbreact";
-import FooterPage from "./components/footer.js";
-import Lightbox from "./components/Lightbox";
-import "./css/index.css";
+import {
+  MDBContainer,
+  MDBMask,
+  MDBView,
+  MDBCol,
+  MDBRow,
+  MDBCardBody,
+  MDBCard,
+} from "mdbreact";
+import FooterPage from "../components/footer.js";
+import ContactUscomponnet from "../components/contactUs.js";
 
-class Gallery extends Component {
+import "../css/index.css";
+
+class ContactUs extends Component {
   render() {
-    console.log("render Gallery");
     return (
       <div>
-        <MDBView className="bggallery">
+        <MDBView className="bgcontactus">
           <MDBMask
             overlay="stylish-light"
             className="flex-center flex-column text-white text-center"
@@ -32,16 +40,19 @@ class Gallery extends Component {
               </figure>
             </MDBCardBody>
           </MDBCard>
-          <MDBContainer className="text-center my-5">
-            <Lightbox />
+          <MDBContainer className="my-5">
+            <MDBRow className="justify-content-center">
+              <MDBCol md="11" className="offset-md-3 justify-content-md-center">
+                <p className="h4 text-center mb-4 ">צרו קשר</p>
+                <ContactUscomponnet className="cdcd" />
+              </MDBCol>
+            </MDBRow>
           </MDBContainer>
         </main>
-        <footer>
-          <FooterPage />
-        </footer>
+        <FooterPage />
       </div>
     );
   }
 }
 
-export default Gallery;
+export default ContactUs;

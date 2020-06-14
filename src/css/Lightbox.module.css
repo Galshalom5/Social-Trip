@@ -12,7 +12,7 @@
 .aaa img {
   transition: transform 2s, filter 1.5s ease-in-out;
   transform-origin: center center;
-  filter: brightness(50%);
+  filter: brightness(80%);
 }
 
 .aaa:hover img {

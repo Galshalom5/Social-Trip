@@ -1,0 +1,16 @@
+.form-control.is-valid,
+.was-validated .form-control:valid {
+  background-position: left !important ;
+}
+.md-form .form-control.is-valid,
+.md-form .form-control.is-invalid {
+  background-position: left !important;
+}
+.md-form .form-control.is-invalid,
+.was-validated .md-form .form-control:invalid {
+  background-position: left !important;
+}
+
+.md-form{
+margin-top: 2rem;
+}

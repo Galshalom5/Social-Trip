@@ -11,6 +11,10 @@ export const navItems = [
         route: "/AdminRoute/EventsTable",
       },
       {
+        title: "ניהול ציר זמן",
+        route: "/AdminRoute/TimeLineTable",
+      },
+      {
         title: "ניהול גלריה",
         route: "/AdminRoute/GalleryTable",
       },

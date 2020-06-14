@@ -8,7 +8,7 @@ import SubscribersMangment from "./SubscribersMangment.js";
 import FeedBackTable from "./Components/FeedBackTable.js";
 import ContactUsMangment from "./ContactUsMangment.js";
 import EventsTable from "./Components/EventsTable.js";
-
+import TimeLineTable from "./Components/TimeLineTable.js";
 const SideNavPage = () => (
   <Container style={{ direction: "rtl" }}>
     <Wrapper>
@@ -22,13 +22,11 @@ const SideNavPage = () => (
       <Switch>
         <Route path="/AdminRoute/EventsTable" component={EventsTable} />
         <Route path="/AdminRoute/GalleryTable" component={GalleryTable} />
+        <Route path="/AdminRoute/TimeLineTable" component={TimeLineTable} />
+        <Route path="/AdminRoute/FeedBackTable" component={FeedBackTable} />
         <Route
           path="/AdminRoute/SubscribersMangment"
           component={SubscribersMangment}
-        />
-        <Route
-          path="/AdminRoute/FeedBackTable"
-          component={FeedBackTable}
         />
         <Route
           path="/AdminRoute/ContactUsMangment"

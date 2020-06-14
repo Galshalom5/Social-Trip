@@ -15,7 +15,6 @@ import {
 import '../css/UploadEvent.css'
 import { storage, db } from '../index'
 import '../css/Admin.css'
-import { faCoffee } from '@fortawesome/fontawesome-free-solid'
 
 
 

@@ -58,7 +58,7 @@ const EventsCreator = (state) => {
     if (!event.target.classList.contains('was-validated'))
       event.target.classList.add('was-validated')
     if (event.target.checkValidity()) {
-      db.collection(`${titleRef.current}`).doc(`${data.name + " " + data.lastName}`).set(data)
+      db.collection('wantsToSignin').doc(`${data.name + " " + data.lastName}`).set(data)
       .then(() => {
         alert('בקשת הרשמה התקבלה למערכת')
       })

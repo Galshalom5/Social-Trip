@@ -8,9 +8,7 @@ import {
   MDBModalBody,
   MDBModalHeader,
   MDBModalFooter,
-  MDBInput,
   MDBBtn,
-  MDBFileInput,
 } from "mdbreact";
 import GalleryTable from "./Components/GalleryTable.js";
 import "../css/Admin.css";
@@ -22,7 +20,7 @@ class GalleryMangment extends Component {
     modal17: false,
     filePath: "",
     fileName: "",
-    loading: false,
+    // loading: false,
     Pictures: [],
   };
 

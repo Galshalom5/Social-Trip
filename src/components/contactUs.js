@@ -9,7 +9,7 @@ import {
   MDBIcon,
   MDBInput,
 } from "mdbreact";
-import { render } from "react-dom";
+
 
 class contactUs extends Component {
   constructor(props) {

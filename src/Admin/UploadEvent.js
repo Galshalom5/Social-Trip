@@ -7,16 +7,10 @@ import {
   MDBModalHeader,
   MDBModalFooter,
   MDBInput,
-  MDBIcon,
-  Fa,
-  MDBRow,
-  MDBCol
 } from "mdbreact";
 import '../css/UploadEvent.css'
 import { storage, db } from '../index'
 import '../css/Admin.css'
-
-
 
 
 class UploadEvent extends Component {
@@ -96,7 +90,7 @@ class UploadEvent extends Component {
     const { modalIsOpen } = this.props
     return (
       <MDBContainer>
-        <MDBBtn onClick={this.toggle(16)} rounded outline color="success" >הוסף אירוע</MDBBtn>
+        <MDBBtn onClick={this.toggle(16)} rounded color="blue" className="text-white" >הוסף אירוע</MDBBtn>
         <MDBModal
           position="left-top"
           isOpen={this.state.modal16}

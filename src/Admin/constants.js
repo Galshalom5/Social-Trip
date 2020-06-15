@@ -4,7 +4,7 @@ export const navItems = [
     children: [
       {
         title: "ניהול פידבקים",
-        route: "/AdminRoute/FeedBackMangement",
+        route: "/AdminRoute/FeedBackTable",
       },
       {
         title: "ניהול אירועים",
@@ -12,7 +12,7 @@ export const navItems = [
       },
       {
         title: "ניהול גלריה",
-        route: "/AdminRoute/GalleryMangment",
+        route: "/AdminRoute/GalleryTable",
       },
     ],
   },

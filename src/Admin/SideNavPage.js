@@ -3,10 +3,9 @@ import { Route, Switch } from "react-router-dom";
 import { Container, Content, SideNavigation } from "side-navigation-react";
 import { navItems, theme } from "./constants";
 import { Wrapper } from "./styles";
-import UploadEvent from "./Components/EventsTable.js";
-import GalleryMangment from "./GalleryMangment.js";
+import GalleryTable from "./Components/GalleryTable.js";
 import SubscribersMangment from "./SubscribersMangment.js";
-import FeedBackMangment from "./FeedBackMangment.js";
+import FeedBackTable from "./Components/FeedBackTable.js";
 import ContactUsMangment from "./ContactUsMangment.js";
 import EventsTable from "./Components/EventsTable.js";
 
@@ -22,14 +21,14 @@ const SideNavPage = () => (
     <Content>
       <Switch>
         <Route path="/AdminRoute/EventsTable" component={EventsTable} />
-        <Route path="/AdminRoute/GalleryMangment" component={GalleryMangment} />
+        <Route path="/AdminRoute/GalleryTable" component={GalleryTable} />
         <Route
           path="/AdminRoute/SubscribersMangment"
           component={SubscribersMangment}
         />
         <Route
-          path="/AdminRoute/FeedBackMangement"
-          component={FeedBackMangment}
+          path="/AdminRoute/FeedBackTable"
+          component={FeedBackTable}
         />
         <Route
           path="/AdminRoute/ContactUsMangment"

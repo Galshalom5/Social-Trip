@@ -1,33 +1,39 @@
 import React, { useState, useEffect } from 'react'
-import { MDBContainer, MDBDataTable } from 'mdbreact'
+import { MDBContainer, MDBDataTable, MDBBtn} from 'mdbreact'
 import { db } from '../index'
 
 
 const SubscribersMangment = () => {
 
   const [members, setmembers] = useState([])
-
-
   var wantsToSign = []
+  var registerList
+
   const data = {
     columns: [
+      {
+        label: 'שם המסע/סיור',
+        field: 'tripName',
+        sort: 'asc',
+        width: 170
+      },
       {
         label: 'שם',
         field: 'name',
         sort: 'asc',
-        width: 150
+        width: 120
       },
       {
         label: 'שם משפחה',
         field: 'lastname',
         sort: 'asc',
-        width: 220
+        width: 160
       },
       {
         label: 'טלפון',
         field: 'phoneNumber',
         sort: 'asc',
-        width: 150
+        width: 180
       },
       {
         label: 'אימייל',
@@ -36,53 +42,12 @@ const SubscribersMangment = () => {
         width: 200
       },
       {
-        label: 'כתובת מגורים',
-        field: 'address',
+        label: 'צפייה בכל הפרטים',
+        field: 'details',
         sort: 'asc',
-        width: 200
+        width: 170
       },
-      {
-        label: 'מוסד לימודים',
-        field: 'school',
-        sort: 'asc',
-        width: 150
-      },
-      {
-        label: 'מסלול לימודים',
-        field: 'curriculum',
-        sort: 'asc',
-        width: 150
-      },
-      {
-        label: 'מדוע מעוניין להשתתף',
-        field: 'why',
-        sort: 'asc',
-        width: 200
-      },
-      {
-        label: 'ציפיות',
-        field: 'expectaions',
-        sort: 'asc',
-        width: 200
-      },
-      {
-        label: 'בא עם רכב',
-        field: 'vehicle',
-        sort: 'asc',
-        width: 50
-      },
-      {
-        label: 'מוכן לקחת טרמפ',
-        field: 'tremp',
-        sort: 'asc',
-        width: 50
-      },
-      {
-        label: 'מקומות פנויים ברכב',
-        field: 'availbleSeats',
-        sort: 'asc',
-        width: 50
-      },
+      
     ],
 
     rows: members
@@ -91,13 +56,23 @@ const SubscribersMangment = () => {
 
 
   useEffect(() => {
-    db.collection('wantsToSign').get()
+    db.collection('wantsToSignin').get()
     .then(snapshot => {
+      registerList = snapshot
       snapshot.forEach(elements => {
-        
+        wantsToSign.push({
+          tripName: elements.data().eventName,
+          name: elements.data().name,
+          lastname: elements.data().lastName,
+          phoneNumber: elements.data().phoneNumber,
+          email: elements.data().email,
+          details: <MDBBtn gradient="blue">פרטים נוספים</MDBBtn>
+        })
       })
+      console.log(wantsToSign)
+      setmembers(wantsToSign)
     })
-  })
+  }, [])
 
 
 

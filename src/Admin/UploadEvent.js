@@ -90,7 +90,11 @@ class UploadEvent extends Component {
     const { modalIsOpen } = this.props
     return (
       <MDBContainer>
+<<<<<<< HEAD
+        <MDBBtn onClick={this.toggle(16)} rounded color="blue" className="text-white" >הוסף אירוע</MDBBtn>
+=======
         <MDBBtn onClick={this.toggle(16)} rounded outline color="success" >הוסף אירוע</MDBBtn>
+>>>>>>> origin
         <MDBModal
           position="left-top"
           isOpen={this.state.modal16}

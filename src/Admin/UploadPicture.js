@@ -94,7 +94,11 @@ class UploadFeedBack extends Component {
             onSubmit={this.clickHandler}
           >
             <MDBModalBody style={{ maxHeight: "75vh" }}>
+<<<<<<< HEAD
+              <MDBAlert color="primary">יש להעאלות תמונה אחת לפחות</MDBAlert>
+=======
               <MDBAlert color="primary">יש להעלאות תמונה אחת לפחות</MDBAlert>
+>>>>>>> origin
               <InputDropzoneComponent
                 onAddFile={this.onAddFile}
                 onRemoveFile={this.onRemoveFile}

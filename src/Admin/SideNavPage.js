@@ -22,13 +22,23 @@ const SideNavPage = () => (
       <Switch>
         <Route path="/AdminRoute/EventsTable" component={EventsTable} />
         <Route path="/AdminRoute/GalleryTable" component={GalleryTable} />
+<<<<<<< HEAD
+=======
         <Route path="/AdminRoute/TimeLineTable" component={TimeLineTable} />
         <Route path="/AdminRoute/FeedBackTable" component={FeedBackTable} />
+>>>>>>> origin
         <Route
           path="/AdminRoute/SubscribersMangment"
           component={SubscribersMangment}
         />
         <Route
+<<<<<<< HEAD
+          path="/AdminRoute/FeedBackTable"
+          component={FeedBackTable}
+        />
+        <Route
+=======
+>>>>>>> origin
           path="/AdminRoute/ContactUsMangment"
           component={ContactUsMangment}
         />

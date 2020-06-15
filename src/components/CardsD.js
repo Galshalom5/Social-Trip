@@ -38,7 +38,8 @@ const EventsCreator = (state) => {
     expectaions: '',
     vehicle: '',
     tremp: '',
-    availbleSeats: '0'
+    availbleSeats: '0',
+    eventName: ''
   })
   const [errData, seterrData] = useState({
     errName: 'חובה להזין שם',
@@ -75,6 +76,7 @@ const EventsCreator = (state) => {
   }
 
   function SignModal(title) {
+    setdata({...data, eventName: title})
     setModalIsOpen(false)
     setRegister(true)
   }

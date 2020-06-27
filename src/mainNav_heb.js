@@ -35,6 +35,7 @@ class FullPageIntroWithFixedTransparentNavbar extends React.Component {
       collapse: !this.state.collapse,
     });
   }
+
   componentDidMount() {}
   render() {
     return (
@@ -48,25 +49,33 @@ class FullPageIntroWithFixedTransparentNavbar extends React.Component {
               expand="md"
               scrolling
               transparent
-              className="mx-auto"
+              className="mx-auto float-md-right"
             >
               {!this.state.isWideEnough && (
-                <MDBNavbarToggler onClick={this.onClick} />
+                <MDBNavbarToggler
+                  right
+                  className="ml-auto text-right pr-3 "
+                  onClick={this.onClick}
+                />
               )}
-              <MDBCollapse isOpen={this.state.collapse} navbar>
-                <div className="navbar-nav nav-flex-icons ml-auto justify-content-center">
-                  <li className="nav-item">
-                    <a
-                      className="nav-link"
-                      target="_blank"
-                      alt=""
-                      rel="noopener noreferrer"
-                      href="https://www.facebook.com/masahevratii/"
-                    >
-                      <i className="fab fa-facebook fa-2x white-text"></i>
-                    </a>
-                  </li>
-                </div>
+
+              <MDBCollapse
+                className="float-right text-right pr-1"
+                isOpen={this.state.collapse}
+                navbar
+                expand="md"
+              >
+                <MDBNavbarBrand className="end">
+                  <a
+                    className="nav-link"
+                    target="_blank"
+                    alt=""
+                    rel="noopener noreferrer"
+                    href="https://www.facebook.com/masahevratii/"
+                  >
+                    <i className="fab fa-facebook fa-2x white-text"></i>
+                  </a>
+                </MDBNavbarBrand>
                 <MDBNavbarNav className="justify-content-md-center">
                   <MDBNavItem>
                     <MDBNavLink
@@ -103,7 +112,6 @@ class FullPageIntroWithFixedTransparentNavbar extends React.Component {
                     </MDBNavLink>
                   </MDBNavItem>
                 </MDBNavbarNav>
-
                 <MDBNavbarBrand className="start">
                   <a href="./">
                     <img

@@ -11,9 +11,10 @@ import FooterPage from "../components/footer.js";
 import CardsD from "../components/CardsD";
 import Style from "../css/CardStyle.module.css";
 import "../css/index.css";
-import { db } from '../index'
+import { db } from "../index";
 
 class Events extends Component {
+  /// New State PrevEventsData - line 50 |||| Read and pass correct list - newsection + lines 130 ,135 ||  correct audience read - line 65
   state = {
     eventsData: [
       // {
@@ -47,29 +48,50 @@ class Events extends Component {
       //     "אוכל דרוזי מבוסס על חומרי גלם פשוטים, רובם זמינים ליד הבית. בנחלה בטבע מרב הגידולים נעשים בנחלה ופרחה אשתו של קאסם אחראית על המטבח הדרוזי המשובח של המשפחה, עלי גפן ממולאים, חומוס טרי, קובה , פיתות דרוזיות, מנסף כבש, מקלובה, ירקות מוחמצים, זיתים כבושים, מיצים טבעיים של פסיפלורה, תאנים ועוד.",
       // },
     ],
+    prevEventsData: [],
   };
 
-componentDidMount() {
-  let date
-  var eventsDocs = []
-  db.collection('events').get()
-  .then(querySnapshot => {
-    querySnapshot.forEach( doc => {
-      date = doc.data().date
-      date = date.toString().split("-").reverse().join("-")
-      eventsDocs.push({
-        imageUrl: doc.data().url,
-        title: doc.data().eventName,
-        date: date,
-        audience: doc.data().audience,
-        description: doc.data().shortDescription,
-        fullDesc: doc.data().fullDescription,
-      })
-    })
-    this.setState({...this.state, eventsData: eventsDocs})
-  })
-}
-
+  componentDidMount() {
+    let date;
+    var eventsDocs = [];
+    db.collection("events")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          date = doc.data().date;
+          date = date.toString().split("-").reverse().join("-");
+          eventsDocs.push({
+            imageUrl: doc.data().url,
+            title: doc.data().eventName,
+            date: date,
+            audience: doc.data().audiance,
+            description: doc.data().shortDescription,
+            fullDesc: doc.data().fullDescription,
+          });
+        });
+        this.setState({ ...this.state, eventsData: eventsDocs });
+      });
+    /// new section ----------------------------------------------
+    var prevEventsDocs = [];
+    db.collection("PrevEvents")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          date = doc.data().date;
+          date = date.toString().split("-").reverse().join("-");
+          prevEventsDocs.push({
+            imageUrl: doc.data().url,
+            title: doc.data().eventName,
+            date: date,
+            audience: doc.data().audiance,
+            description: doc.data().shortDescription,
+            fullDesc: doc.data().fullDescription,
+            isPrev: true,
+          });
+        });
+        this.setState({ ...this.state, prevEventsData: prevEventsDocs });
+      });
+  } //---------------------------------------------------------------------------------
 
   render() {
     return (
@@ -81,22 +103,24 @@ componentDidMount() {
           ></MDBMask>
         </MDBView>
         <main>
-          <MDBCard
-            color="#e65100 orange darken-4"
-            text="white"
-            className="text-center"
-          >
-            <MDBCardBody>
-              <figure className="figure">
-                <h2 className="h2-responsive font-weight-normal text-center my-5 card_style">
-                  "אדם אינו אלא תבנית, נוף מולדתו"
-                </h2>
-                <figcaption className="figure-caption text-left fig_style">
-                  ש.טשרניחובסקי
-                </figcaption>
-              </figure>
-            </MDBCardBody>
-          </MDBCard>
+          <MDBView>
+            <MDBCard
+              color="#e65100 orange darken-4"
+              text="white"
+              className="text-center mainCard"
+            >
+              <MDBCardBody>
+                <figure className="figure">
+                  <h2 className="h2-responsive font-weight-normal text-center card_style">
+                    "אדם אינו אלא תבנית נוף מולדתו"
+                  </h2>
+                  <figcaption className="figure-caption text-left fig_style">
+                    ש.טשרניחובסקי
+                  </figcaption>
+                </figure>
+              </MDBCardBody>
+            </MDBCard>
+          </MDBView>
           <MDBContainer className="text-center  my-5">
             <h2 className="text-right e">מסעות</h2>
             <p className="text-right">
@@ -113,7 +137,7 @@ componentDidMount() {
             <hr className={Style.outside}></hr>
             <h2 className="text-right">מסעות קודמים</h2>
             <hr className={Style.outside}></hr>
-            <CardsD eventsArr={this.state.eventsData} />
+            <CardsD eventsArr={this.state.prevEventsData}  />
           </MDBContainer>
         </main>
         <FooterPage />

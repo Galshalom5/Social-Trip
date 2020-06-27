@@ -21,25 +21,27 @@ class Partners extends Component {
           ></MDBMask>
         </MDBView>
         <main>
-          <MDBCard
-            color="#e65100 orange darken-4"
-            text="white"
-            className="text-center"
-          >
-            <MDBCardBody>
-              <figure className="figure">
-                <h2 className="h2-responsive font-weight-normal text-center my-5 card_style">
-                  "אדם אינו אלא תבנית, נוף מולדתו"
-                </h2>
-                <figcaption className="figure-caption text-left fig_style">
-                  ש.טשרניחובסקי
-                </figcaption>
-              </figure>
-            </MDBCardBody>
-          </MDBCard>
+          <MDBView>
+            <MDBCard
+              color="#e65100 orange darken-4"
+              text="white"
+              className="text-center mainCard"
+            >
+              <MDBCardBody>
+                <figure className="figure">
+                  <h2 className="h2-responsive font-weight-normal text-center card_style">
+                    "אדם אינו אלא תבנית נוף מולדתו"
+                  </h2>
+                  <figcaption className="figure-caption text-left fig_style">
+                    ש.טשרניחובסקי
+                  </figcaption>
+                </figure>
+              </MDBCardBody>
+            </MDBCard>
+          </MDBView>
           <MDBContainer className="text-center my-5 align-content-center">
             <MDBRow>
-              <MDBCol md="11">
+              <MDBCol md="12">
                 {" "}
                 <h3 className="text-right">:השותפים למסע</h3>
                 <p className="text-right">

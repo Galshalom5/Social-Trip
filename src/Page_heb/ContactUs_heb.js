@@ -24,27 +24,31 @@ class ContactUs extends Component {
           ></MDBMask>
         </MDBView>
         <main>
-          <MDBCard
-            color="#e65100 orange darken-4"
-            text="white"
-            className="text-center"
-          >
-            <MDBCardBody>
-              <figure className="figure">
-                <h2 className="h2-responsive font-weight-normal text-center my-5 card_style">
-                  "אדם אינו אלא תבנית, נוף מולדתו"
-                </h2>
-                <figcaption className="figure-caption text-left fig_style">
-                  ש.טשרניחובסקי
-                </figcaption>
-              </figure>
-            </MDBCardBody>
-          </MDBCard>
+          <MDBView>
+            <MDBCard
+              color="#e65100 orange darken-4"
+              text="white"
+              className="text-center mainCard"
+            >
+              <MDBCardBody>
+                <figure className="figure">
+                  <h2 className="h2-responsive font-weight-normal text-center card_style">
+                    "אדם אינו אלא תבנית נוף מולדתו"
+                  </h2>
+                  <figcaption className="figure-caption text-left fig_style">
+                    ש.טשרניחובסקי
+                  </figcaption>
+                </figure>
+              </MDBCardBody>
+            </MDBCard>
+          </MDBView>
           <MDBContainer className="my-5">
             <MDBRow className="justify-content-center">
+              <p className="h4 text-center mb-4 ">צרו קשר</p>
+            </MDBRow>
+            <MDBRow className="justify-content-start">
               <MDBCol md="11" className="offset-md-3 justify-content-md-center">
-                <p className="h4 text-center mb-4 ">צרו קשר</p>
-                <ContactUscomponnet className="cdcd" />
+                <ContactUscomponnet />
               </MDBCol>
             </MDBRow>
           </MDBContainer>

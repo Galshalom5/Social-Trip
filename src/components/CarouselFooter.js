@@ -13,16 +13,29 @@ const getCol = (state) => {
   const { feedBack } = state;
   return feedBack.map((item, index) => {
     return (
-      <MDBCol className="align-top" style={{ display: "inline-block" }} md="3">
-        <MDBTestimonial className="top">
-          <MDBAvatar style={{ width: "100px" }} className="mx-auto">
+      <MDBCol
+        className="align-top text-center"
+        style={{ display: "inline-block" }}
+        md="3"
+        key={index}
+      >
+        <MDBTestimonial>
+          <MDBAvatar style={{ width: "10em" }} className="mx-auto">
             <i className="fas fa-user-circle fa-4x"></i>
           </MDBAvatar>
-          <h6 style={{ textAlign: "center" }} className="font-weight-bold mt-4">
+          <h6
+            style={{ textAlign: "center" }}
+            className="font-weight-bold mt-4"
+            dir="rtl"
+          >
             {" "}
             {item.data().name}
           </h6>
-          <p style={{ textAlign: "center" }} className="font-weight-normal">
+          <p
+            style={{ textAlign: "center" }}
+            className="font-weight-normal"
+            dir="rtl"
+          >
             {item.data().feedBackTxt}
           </p>
         </MDBTestimonial>
@@ -55,7 +68,7 @@ const getCaruselItem = (colArr) => {
 
 const CarouselFooter = (state) => {
   var arr = getCaruselItem(getCol(state));
-  console.log(arr.length);
+
   return (
     <div>
       <MDBContainer style={{ marginTop: "6rem" }}>

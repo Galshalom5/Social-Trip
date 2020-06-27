@@ -1,0 +1,7 @@
+.initialSize {
+    height: initial !important;
+}
+
+.textAreaMaxHeight {
+    max-height: 20vh !important;
+}

@@ -1,0 +1,15 @@
+.md-form .prefix {
+  top: 0px !important;
+}
+
+.md-form .prefix ~ label {
+  margin-left: 0px !important;
+}
+
+/* .md-form label {
+    color: #e0f7fa !important;
+} */
+
+.myDiv {
+  color: #e0f7fa !important;
+}

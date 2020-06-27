@@ -1,17 +1,18 @@
-.md-form label.active{
-    transform: translate(0px,-16px) 
-} 
+.md-form label.active {
+  transform: translate(0px, -16px);
+}
 
 .close {
-    display: none;
+  display: none;
 }
 
 .maxHeight {
-    min-height: 5vh !important;
-    max-height: 20vh !important;
+  min-height: 5vh !important;
+  max-height: 20vh !important;
 }
 
-.isActive{
-    max-height: 38px !important;
+.isActive {
+  max-height: 38px !important;
 }
+
 

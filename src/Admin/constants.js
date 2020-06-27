@@ -3,16 +3,24 @@ export const navItems = [
     title: "עריכת האתר",
     children: [
       {
+        title: "ניהול ציר זמן",
+        route: "/AdminRoute/TimeLineTable",
+      },
+      {
         title: "ניהול פידבקים",
-        route: "/AdminRoute/FeedBackMangement",
+        route: "/AdminRoute/FeedBackTable",
       },
       {
         title: "ניהול אירועים",
         route: "/AdminRoute/EventsTable",
       },
       {
+        title: "ניהול אירועים קודמים",
+        route: "/AdminRoute/PrevEventsTable",
+      },
+      {
         title: "ניהול גלריה",
-        route: "/AdminRoute/GalleryMangment",
+        route: "/AdminRoute/GalleryTable",
       },
     ],
   },
@@ -35,7 +43,6 @@ export const navItems = [
     ],
   },
 ];
-
 const DarkBlue = "#000066";
 const White = "#ffffff";
 const Black = "#000";
@@ -50,6 +57,7 @@ export const theme = {
     subListItemTextColor: Black,
     subListItemHeadingColor: Black,
     subListItemHeadingArrowColor: Red,
+
     hover: {
       subListItemBackgroundOnHover: DarkBlue,
       subListItemColorOnHover: White,

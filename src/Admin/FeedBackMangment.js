@@ -84,8 +84,6 @@ class FeedBackMangement extends Component {
     this.fetchData();
   }
   submitHandler = (name, txt) => {
-    console.log(name);
-    console.log(txt);
     if ($(".feedBackForm")[0].checkValidity()) {
       this.addFeedBack(name, txt);
     }

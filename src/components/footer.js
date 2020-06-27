@@ -1,15 +1,10 @@
 import React, { Component } from "react";
 import { db } from "../index";
-import {
-  MDBContainer,
-  MDBFooter,
-  MDBRow,
-  MDBCol,
-  MDBBtn,
-  MDBCollapse,
-} from "mdbreact";
+import { MDBContainer, MDBFooter, MDBRow, MDBCol } from "mdbreact";
 import CarouselFooter from "./CarouselFooter.js";
-import ContactUs from "./contactUsFooter.js";
+
+import logo from "../Images/logo_img.png";
+import logoruch from "../Images/logoruch.png";
 import "../css/index.css";
 class footer extends Component {
   state = {
@@ -43,7 +38,7 @@ class footer extends Component {
           <MDBContainer fluid className="justify-content-md-center">
             <MDBRow></MDBRow>
             <MDBRow center>
-              <MDBCol md="3">
+              {/* <MDBCol className="text-center align-self-md-center">
                 <>
                   <MDBBtn
                     color="#e65100 orange darken-4"
@@ -58,11 +53,46 @@ class footer extends Component {
                     id="basicCollapse"
                     isOpen={this.state.collapseID}
                   >
-                    <ContactUs />
+                    <ContactUs className="cdcd" />
                   </MDBCollapse>
                 </>
+              </MDBCol> */}
+
+              <MDBCol
+                xs="4"
+                md="3"
+                className="text-center align-self-md-center"
+              >
+                <li>
+                  <a
+                    target="_blank"
+                    alt=""
+                    rel="noopener noreferrer"
+                    href="https://www.facebook.com/masahevratii/"
+                    className="m-1"
+                  >
+                    <i className="fab fa-facebook fa-2x indigo-text"></i>
+                  </a>
+                  <a
+                    target="_blank"
+                    href="https://www.youtube.com/channel/UCF2HoWUxaTn4REDw2tBJkew"
+                    alt=""
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fab fa-youtube fa-2x red-text"></i>
+                  </a>
+                  <a
+                    target="_blank"
+                    href="https://www.instagram.com/socialjourney1001/"
+                    alt=""
+                    rel="noopener noreferrer"
+                    className="m-1"
+                  >
+                    <i className="fab fa-instagram fa-2x blue-text"></i>
+                  </a>
+                </li>
               </MDBCol>
-              <MDBCol md="3" className="text-center ">
+              {/* <MDBCol className="text-center align-self-md-center">
                 <ul>
                   <h5 className="blue-grey-text title">קישורים</h5>
                   <li className="list-unstyled">
@@ -80,47 +110,34 @@ class footer extends Component {
                       מכללת דוד ילין
                     </a>
                   </li>
-                  <li className="list-unstyled">
-                    <a href="#!" className="blue-grey-text">
-                      עמותת גולשים בים על שם נעמי.מ
-                    </a>
-                  </li>
                 </ul>
-              </MDBCol>
-              <MDBCol md="3" className="text-center align-self-md-center">
-                <li>
-                  <a
-                    target="_blank"
+              </MDBCol> */}
+              <MDBCol
+                xs="4"
+                md="3"
+                className="text-center align-self-md-center"
+              >
+                <a href="./">
+                  <img src={logo} style={{ width: 80 }} alt="" />
+                </a>
+                <a
+                  href="https://www.facebook.com/Ruach.Nachon"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={logoruch}
+                    style={{ width: 50, height: 60 }}
                     alt=""
-                    rel="noopener noreferrer"
-                    href="https://www.facebook.com/masahevratii/"
-                    className="m-1"
-                  >
-                    <i className="fab fa-facebook fa-2x indigo-text"></i>
-                  </a>
-                  <a target="_blank" href="/" alt="" rel="noopener noreferrer">
-                    <i className="fab fa-youtube fa-2x red-text"></i>
-                  </a>
-                  <a
-                    target="_blank"
-                    href="/"
-                    alt=""
-                    rel="noopener noreferrer"
-                    className="m-1"
-                  >
-                    <i className="fab fa-instagram fa-2x blue-text"></i>
-                  </a>
-                </li>
+                  />
+                </a>
               </MDBCol>
             </MDBRow>
           </MDBContainer>
           <div className="footer-copyright text-center py-3">
             <MDBContainer fluid>
               &copy; {new Date().getFullYear()} Copyright:{" "}
-              <a href="https://github.com/Galshalom5/Social-Trip">
-                {" "}
-                Gal | Tom | Dor | Naomi | Guy
-              </a>
+              <a href="/"> Gal | Tom | Dor | Naomi | Guy</a>
             </MDBContainer>
           </div>
         </MDBFooter>

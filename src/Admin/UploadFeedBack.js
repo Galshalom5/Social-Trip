@@ -6,21 +6,35 @@ import {
   MDBModalBody,
   MDBModalHeader,
   MDBModalFooter,
-  MDBCol,
-  MDBRow,
   MDBInput,
-  MDBDatePickerV5,
 } from "mdbreact";
+import "../css/UploadEvent.css";
+import { db } from "../index";
+import "../css/Admin.css";
 
 class UploadFeedBack extends Component {
   state = {
     modal16: false,
-    eventName: "",
-    filePath: "",
-    date: "",
-    audiance: "",
-    shortDescription: "",
-    fullDescription: "",
+    FeedBackName: "",
+    FeedBackTxt: "",
+    isActive1: false,
+    isActive2: false,
+  };
+
+  clickHandler = async (event) => {
+    event.preventDefault();
+    if (!event.target.classList.contains("was-validated"))
+      event.target.className += " was-validated";
+    if (event.target.checkValidity()) {
+      var promise = new Promise((resolve) => {
+        let modalNumber = "modal" + 16;
+        this.addFeedBackHandler();
+        this.setState({
+          ...this.state,
+          [modalNumber]: !this.state[modalNumber],
+        });
+      });
+    }
   };
 
   toggle = (nr) => () => {
@@ -30,10 +44,30 @@ class UploadFeedBack extends Component {
     });
   };
 
+  addFeedBackHandler = () => {
+    db.collection("FeedBack")
+      .add({
+        name: this.state.FeedBackName,
+        feedBackTxt: this.state.FeedBackTxt,
+      })
+      .then((snapshot) => {
+        console.log("FeedBack added to firebase");
+        alert("התווסף פידבק חדש");
+        this.props.value(0);
+      })
+      .catch((err) => {
+        console.log("err add to fireBase", err);
+        alert("feedBack was not added to firebase please try again");
+      });
+  };
+
   render() {
+    // const { modalIsOpen } = this.props;
     return (
       <MDBContainer>
-        <MDBBtn onClick={this.toggle(16)}>הוסף פידבק</MDBBtn>
+        <MDBBtn onClick={this.toggle(16)} rounded color="blue">
+          הוסף פידבק
+        </MDBBtn>
         <MDBModal
           position="left-top"
           isOpen={this.state.modal16}
@@ -42,38 +76,59 @@ class UploadFeedBack extends Component {
           <MDBModalHeader toggle={this.toggle(16)} dir="rtl">
             הוסף פידבק
           </MDBModalHeader>
-          <MDBModalBody>
-            <div className="form-group">
+          <form
+            className="needs-validation"
+            noValidate
+            onSubmit={this.clickHandler}
+          >
+            <MDBModalBody style={{ maxHeight: "75vh" }}>
               <MDBInput
+                required
                 type="text"
-                labelClass="col text-right"
-                label="שם המגיב"
+                dir="rtl"
+                maxLength="24"
+                labelClass={`col text-right `}
                 className="col text-right"
+                label="שם הכותב"
                 getValue={(e) =>
-                  this.setState({ ...this.state, audiance: e }, () =>
-                    console.log(e)
-                  )
+                  this.setState({ ...this.state, FeedBackName: e })
                 }
-              />
+              >
+                <div className="invalid-feedback">חובה להכניס תוכן</div>
+              </MDBInput>
               <MDBInput
+                required
+                dir="rtl"
+                maxLength="240"
                 type="textarea"
                 labelClass="col text-right"
-                label="תיאור קצר"
-                className="col text-right"
+                label="תוכן הפידבק"
+                className={`col text-right maxHeight ${
+                  this.state.isActive2 ? "isActive" : ""
+                }`}
                 getValue={(e) =>
-                  this.setState({ ...this.state, shortDescription: e }, () =>
-                    console.log(e)
-                  )
+                  this.setState({ ...this.state, FeedBackTxt: e })
                 }
-              />
-            </div>
-          </MDBModalBody>
-          <MDBModalFooter>
-            <MDBBtn color="secondary" onClick={this.toggle(16)}>
-              Close
-            </MDBBtn>
-            <MDBBtn color="primary">הוסף</MDBBtn>
-          </MDBModalFooter>
+                onFocus={() =>
+                  this.setState({
+                    ...this.state,
+                    isActive1: true,
+                    isActive2: false,
+                  })
+                }
+              >
+                <div className="invalid-feedback">חובה להכניס תוכן</div>
+              </MDBInput>
+            </MDBModalBody>
+            <MDBModalFooter>
+              <MDBBtn color="secondary" onClick={this.toggle(16)}>
+                ביטול
+              </MDBBtn>
+              <MDBBtn type="submit" color="primary">
+                הוסף פידבק
+              </MDBBtn>
+            </MDBModalFooter>
+          </form>
         </MDBModal>
       </MDBContainer>
     );

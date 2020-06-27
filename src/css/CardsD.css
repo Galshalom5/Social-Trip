@@ -1,3 +1,15 @@
 .md-form {
     margin-top: none !important;
 }
+
+.initialSize {
+    height: initial !important;
+}
+
+.textAreaMaxHeight {
+    max-height: 15vh !important;
+}
+
+.md-form .form-control{
+    padding: none !important;
+}

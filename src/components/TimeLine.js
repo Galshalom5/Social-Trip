@@ -37,9 +37,11 @@ const getVerticalElement = (state) => {
             letterSpacing: "2px",
             textShadow: "0.5px 0.5px black",
           }}
-          contentArrowStyle={{
-            borderRight: "0.1px solid  rgb(33, 150, 243)",
-          }}
+          // contentArrowStyle={
+          //   {
+          //   borderRight: "0.1px solid  rgb(33, 150, 243)",
+          //   }
+          // }
           iconStyle={{
             background: "rgb(226, 226, 231)",
             color: "rgb(67, 74, 85)",
@@ -47,7 +49,11 @@ const getVerticalElement = (state) => {
           }}
           icon={
             <MDBIcon
-              style={{ fontSize: "3vw", marginTop: "0.4rem" }}
+              style={{
+                fontSize:
+                  "calc(24px + (42 - 24) * ((100vw - 300px) / (1600 - 300)))",
+                marginTop: "0.5rem",
+              }}
               icon="hiking"
             />
           }

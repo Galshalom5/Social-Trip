@@ -27,9 +27,10 @@ const storage = firebase.storage();
 const db = firebase.firestore();
 const auth = firebase.auth();
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+const td = firebase.firestore.Timestamp();
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
 registerServiceWorker();
 
-export { storage, db, auth, timestamp, firebase as default };
+export { storage, db, auth, timestamp, td, firebase as default };
